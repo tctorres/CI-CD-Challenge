@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+    parameters{
+        string(name: 'url', defaultValue: 'https://www.saucedemo.com/')
+        string(name: 'suiteName', defaultValue: 'testing.xml', description: 'Suite to run')
+    }
+
+     tools {
+         maven "M3"
+     }
+
+     stages {
+         stage('Clone and Fetch code') {
+             steps {
+                 script {
+                     // Clone and fetch steps
+                     git branch: 'main', url: 'https://github.com/tctorres/CI-CD-Challenge.git'
+                 }
+             }
+         }
+
+         stage('Compile application') {
+             steps {
+                 script {
+                     bat "mvn -B -DskipTests clean package"
+                 }
+             }
+         }
+
+         stage('Execute Tests') {
+             steps {
+                 script {
+                     // Run the test suite
+                     bat "mvn test -Durl=${params.url} -DsuiteName=${params.suiteName}"
+                 }
+             }
+             post {
+                 always{
+                     allure([
+                     includeProperties: false,
+                     jdk: '',
+                     properties: [],
+                     reportBuildPolicy: 'ALWAYS',
+                     results: [[path: '*/allure-results']]
+                     ])
+                 }
+             }
+         }
+     }
+ }
