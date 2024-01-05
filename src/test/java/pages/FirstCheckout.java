@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class FirstCheckout extends BasePage{
     @FindBy(id="first-name")
     private WebElement firstName;
@@ -22,7 +24,7 @@ public class FirstCheckout extends BasePage{
         this.postalCd.sendKeys(postalCode);
     }
     public void nextBtn(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(continueBtn));
         this.continueBtn.click();
     }

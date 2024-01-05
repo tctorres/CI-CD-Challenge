@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.BaseTest;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +30,7 @@ public class HomePage extends BasePage {
 
     public void logout(){
         this.menuBtn.click();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(logoutLink));
         this.logoutLink.click();
 
@@ -45,7 +46,7 @@ public class HomePage extends BasePage {
         addToCartButton.click();
     }
     public void goToShoppingCart(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(shoppingCart));
         this.shoppingCart.click();
 

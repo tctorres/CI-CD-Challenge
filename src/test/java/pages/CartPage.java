@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CartPage extends BasePage{
@@ -21,7 +22,7 @@ private  WebElement removeProduct3;
 private List<WebElement> cartItemsList;
 
 public void checkout(){
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     wait.until(ExpectedConditions.visibilityOf(checkoutBtn));
     this.checkoutBtn.click();
 }
